@@ -1,0 +1,10 @@
+name: FirstPlugin
+version: 1.0
+author: Randy
+main: me.randy.firstplugin.Main
+description: My first plugin
+commands:
+  hello:
+    aliases: [hi]
+	description: responds hello to a message
+	
