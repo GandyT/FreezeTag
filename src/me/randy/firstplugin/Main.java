@@ -14,6 +14,9 @@ import me.randy.firstplugin.listeners.JoinListener;
 public final class Main extends JavaPlugin {
 	
 	public Game CurrentGame = null;
+	private int NextSwap = 0;
+	private int Count = 0;
+	
 	@Override
 	public void onEnable () {
 		/* COMMANDS */
@@ -42,11 +45,17 @@ public final class Main extends JavaPlugin {
 	}
 	
 	private void GameLoop () {
-		int int_random = ThreadLocalRandom.current().nextInt() % 8;
-		if (int_random == 0) int_random = 5;
-		this.CurrentGame.Swap();
-		Bukkit.broadcastMessage(int_random + "minutes till the next swap!");
-		this.setTimeout(() -> this.GameLoop(), 1000 * 60 * int_random);
+		
+		Count += 50;
+		if (this.Count >= this.NextSwap) {
+			int int_random = ThreadLocalRandom.current().nextInt() % 8;
+			if (int_random == 0) int_random = 5;
+			this.CurrentGame.Swap();
+			Bukkit.broadcastMessage(int_random + "minutes till the next swap!");
+			this.NextSwap = int_random * 1000 * 60;
+			this.Count = 0;
+		}
+		this.setTimeout(() -> this.GameLoop(), 50);
 	}
 	
 	public void Start () {
@@ -57,6 +66,7 @@ public final class Main extends JavaPlugin {
 		Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[Bukkit.getOnlinePlayers().size()]);
 		CurrentGame = new Game(players);
 		Bukkit.broadcastMessage(ChatColor.AQUA + "First Swap starting in 5 Minutes!");
-		this.setTimeout(() -> this.GameLoop(), 1000 * 60 * 5);
+		this.NextSwap = 1000 * 60 * 5;
+		this.GameLoop();
 	}
 }
