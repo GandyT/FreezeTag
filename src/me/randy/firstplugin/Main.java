@@ -56,7 +56,7 @@ public final class Main extends JavaPlugin {
 		Bukkit.broadcastMessage(ChatColor.GREEN + "Game has begun!");
 		Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[Bukkit.getOnlinePlayers().size()]);
 		CurrentGame = new Game(players);
-		this.setTimeout(() -> this.GameLoop(), 1000 * 60 * 5);
 		Bukkit.broadcastMessage(ChatColor.AQUA + "First Swap starting in 5 Minutes!");
+		this.setTimeout(() -> this.GameLoop(), 1000 * 60 * 5);
 	}
 }
