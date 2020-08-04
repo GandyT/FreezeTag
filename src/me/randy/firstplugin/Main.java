@@ -57,6 +57,15 @@ public final class Main extends JavaPlugin {
 		}
 		this.setTimeout(() -> this.GameLoop(), 50);
 	}
+	public class MultiThread implements Runnable {
+		private int thread;
+		MultiThread (int thread) {
+			this.thread = thread;
+		}
+		public void run () {
+			GameLoop();
+		}
+	}
 	
 	public void Start () {
 		if (this.CurrentGame != null) {
@@ -67,6 +76,7 @@ public final class Main extends JavaPlugin {
 		CurrentGame = new Game(players);
 		Bukkit.broadcastMessage(ChatColor.AQUA + "First Swap starting in 5 Minutes!");
 		this.NextSwap = 1000 * 60 * 5;
-		this.GameLoop();
+		MultiThread GameLoop = new MultiThread(10);
+		GameLoop.run();
 	}
 }
