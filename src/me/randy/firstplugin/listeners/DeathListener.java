@@ -24,6 +24,8 @@ public class DeathListener implements Listener {
 	@EventHandler
 	public void OnDeath (PlayerDeathEvent event) {
 		Player player = event.getEntity();
+		Bukkit.broadcastMessage(ChatColor.RED + player.getName() + ": DEATH!");
+
 		if (this.plugin.CurrentGame != null) {
 			HashMap<String, Player> PlayerMap = this.plugin.CurrentGame.GetPlayers();
 			int Remaining = PlayerMap.size() - 1;
@@ -35,6 +37,9 @@ public class DeathListener implements Listener {
 					Iterator FinalPlayers = PlayerMap.entrySet().iterator();
 					while (FinalPlayers.hasNext()) {
 						Winner = (Player) FinalPlayers.next();
+					}
+					if (Winner == null) {
+						 Bukkit.broadcastMessage(ChatColor.DARK_RED + "Nobody Wins");
 					}
 					Bukkit.broadcastMessage(ChatColor.DARK_GREEN + Winner.getName() + " has won the game!");
 					this.plugin.CurrentGame = null;
