@@ -18,8 +18,11 @@ public class Game {
 		}
 	}
 	
-	
 	/* ACTIONS */
+	public HashMap<String, Player> GetPlayers () {
+		return GamePlayers;
+	}
+	
 	public void RemovePlayer (String Username) {
 		GamePlayers.remove(Username);
 	}

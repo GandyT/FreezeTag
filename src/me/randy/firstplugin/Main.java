@@ -46,6 +46,9 @@ public final class Main extends JavaPlugin {
 	}
 	
 	public void Start () {
+		if (this.CurrentGame != null) {
+			return;
+		}
 		Bukkit.broadcastMessage("/title @a title {\"text\":\"Start!\",\"color\":\"dark_red\"}");
 		Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[Bukkit.getOnlinePlayers().size()]);
 		CurrentGame = new Game(players);
