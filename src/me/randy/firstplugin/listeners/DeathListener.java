@@ -36,10 +36,9 @@ public class DeathListener implements Listener {
 					while (FinalPlayers.hasNext()) {
 						Winner = (Player) FinalPlayers.next();
 					}
-					Bukkit.broadcastMessage("/title @a title {\"text\":\"" + Winner.getName() + " has won!\",\"color\":\"dark_red\"}");
+					Bukkit.broadcastMessage(ChatColor.DARK_GREEN + Winner.getName() + " has won the game!");
 					this.plugin.CurrentGame = null;
 				}
-				Bukkit.broadcastMessage("/gamemode 3 " + player.getName());
 				Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has died! " + Remaining + " players remaining!");
 			}
 		}

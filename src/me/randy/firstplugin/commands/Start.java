@@ -1,8 +1,8 @@
 package me.randy.firstplugin.commands;
 
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.Command;
 
 import me.randy.firstplugin.Main;
 
@@ -11,6 +11,7 @@ public class Start implements CommandExecutor {
 	
 	public Start (Main plugin) {
 		this.plugin = plugin;
+		plugin.getCommand("start").setExecutor(this);
 	}
 
 	@Override

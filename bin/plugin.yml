@@ -5,6 +5,5 @@ main: me.randy.firstplugin.Main
 description: My first plugin
 commands:
   start:
-    aliases: [start]
-	description: starts the deathswap game
-	
+    aliases: [begin]
+    description: "starts the deathswap game"

@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.ChatColor;
 
 import me.randy.firstplugin.Main;
 
@@ -21,7 +22,7 @@ public class JoinListener implements Listener {
 	public void OnJoin (PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (!player.hasPlayedBefore()) {
-			Bukkit.broadcastMessage("/title @a title {\"text\":\"" + player.getName() + " has joined!\",\"color\":\"dark_red\"}");
+			Bukkit.broadcastMessage(ChatColor.GREEN + player.getName() + " has joined for the first time!");
 		}
 	}
 }
