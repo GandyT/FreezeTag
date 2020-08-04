@@ -7,3 +7,6 @@ commands:
   start:
     aliases: [begin]
     description: "starts the deathswap game"
+  end:
+    aliases: [finish]
+    description: "ends the deathswap game"

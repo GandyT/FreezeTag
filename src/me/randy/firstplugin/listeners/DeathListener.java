@@ -28,8 +28,8 @@ public class DeathListener implements Listener {
 
 		if (this.plugin.CurrentGame != null) {
 			HashMap<String, Player> PlayerMap = this.plugin.CurrentGame.GetPlayers();
-			int Remaining = PlayerMap.size() - 1;
 			if (PlayerMap.get(player.getName()) != null) {
+				int Remaining = PlayerMap.size() - 1;
 				this.plugin.CurrentGame.RemovePlayer(player.getName());
 				PlayerMap.remove(player.getName());
 				if (Remaining <= 1) {

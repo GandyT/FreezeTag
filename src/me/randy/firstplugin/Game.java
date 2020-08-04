@@ -16,6 +16,7 @@ public class Game {
 	private HashMap<String, Player> GamePlayers = new HashMap<String, Player>();
 	private Main plugin;
 	private GameLoop loop;
+	private int count = 0;
 	
 	/* CONSTRUCTOR */
 	public Game (Player[] players, Main plugin) {
@@ -32,17 +33,23 @@ public class Game {
 				Bukkit.broadcastMessage(ChatColor.DARK_RED + "No Instance of a game running");
 				return;
 			}
-			Swap();
-			Bukkit.broadcastMessage(ChatColor.DARK_GREEN + "Swapped!");
-			Bukkit.broadcastMessage(ChatColor.DARK_RED + "5 minutes till the next swap!");
- 			
- 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+			count += 20;
+			int TicksRemaining = 6000 - count;
+			if (TicksRemaining <= 200 && TicksRemaining > 0) {
+				Bukkit.broadcastMessage("Swapping in " + Integer.toString(TicksRemaining / 20));
+			} else if (count >= 6000) {
+				count = 0;
+				Swap();
+				Bukkit.broadcastMessage(ChatColor.DARK_GREEN + "Swapped!");
+				Bukkit.broadcastMessage(ChatColor.DARK_RED + "5 minutes till the next swap!");
+			}
+			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 			scheduler.scheduleSyncDelayedTask(plugin, new Runnable() {
-	            @Override
-	            public void run() {
-	                loop.run();
-	            }
-	        }, 6000L);
+				@Override
+				public void run() {
+					loop.run();
+				}
+			}, 20L);
 		}
 	}
 	
@@ -55,10 +62,10 @@ public class Game {
             public void run() {
                 loop.run();
             }
-        }, 6000L);
+        }, 20L);
 	}
 	public HashMap<String, Player> GetPlayers () {
-		return GamePlayers;
+		return this.GamePlayers;
 	}
 	
 	public void RemovePlayer (String Username) {
@@ -76,13 +83,15 @@ public class Game {
 			Map.Entry Element = (Map.Entry) PlayerIterator.next();
 			Player IteratedPlayer = (Player) Element.getValue();
 			
+			Location NextLocation = IteratedPlayer.getLocation();
+			
 			if (PlayerLocation != null) {
 				IteratedPlayer.teleport(PlayerLocation);
 			} else {
-				firstPlayer = IteratedPlayer;
+				firstPlayer = (Player) IteratedPlayer;
 			}
 			
-			PlayerLocation = (Location) IteratedPlayer.getLocation();
+			PlayerLocation = NextLocation;
 		}
 		// Teleport first player to last player location
 		firstPlayer.teleport(PlayerLocation);
