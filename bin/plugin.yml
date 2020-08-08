@@ -1,12 +1,12 @@
-name: FirstPlugin
+name: FreezeTag
 version: 1.0
 author: Randy
-main: me.randy.firstplugin.Main
-description: My first plugin
+main: me.randy.freezetag.Main
+description: 
 commands:
   start:
     aliases: [begin]
-    description: "starts the deathswap game"
+    description: "Starts the freezetag game"
   end:
     aliases: [finish]
-    description: "ends the deathswap game"
+    description: "Ends the freezetag game"
