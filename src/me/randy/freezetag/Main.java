@@ -32,7 +32,12 @@ public class Main extends JavaPlugin {
 				this, 
 				Bukkit.getServer().getOnlinePlayers().toArray(new Player[Bukkit.getOnlinePlayers().size()]) // Converting Collection to Array
 			);
-		if (this.CurrentGame.tagger == null) return;
+		if (this.CurrentGame.tagger == null) {
+			this.CurrentGame = null;
+			return;
+		};
+		
+		this.CurrentGame.loop();
 		
 		Bukkit.broadcastMessage(ChatColor.AQUA + this.CurrentGame.tagger + " is IT! RUN RUN RUN!");
 	}
