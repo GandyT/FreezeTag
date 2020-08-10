@@ -86,7 +86,7 @@ public class Game {
 			public void run () {
 				loop();
 			}
- 		}, 2400L);
-		// 2400L is 2 Minutes
+ 		}, 1800L);
+		// 1800L is 1.5 Minutes
 	}
 }
