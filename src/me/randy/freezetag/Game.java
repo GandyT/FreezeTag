@@ -2,6 +2,8 @@ package me.randy.freezetag;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.bukkit.Bukkit;
@@ -48,7 +50,7 @@ public class Game {
 		/* RANDOM EVENT TO SPICE THINGS UP */
 		int random = ThreadLocalRandom.current().nextInt() % 5; // 5 Events
 		Iterator PlayerIterator = PlayerMap.entrySet().iterator();
-		PotionEffect Effect;
+		PotionEffect Effect = null;
 		switch (random) {
 			case 0:
 				Bukkit.broadcastMessage(ChatColor.AQUA + "Glow Event! 15 Seconds!");
@@ -70,6 +72,12 @@ public class Game {
 				Bukkit.broadcastMessage(ChatColor.AQUA + "Floating Event! 15 Seconds!");
 				Effect = new PotionEffect(PotionEffectType.LEVITATION, 15, 1);
 				break;
+		}
+		
+		while (PlayerIterator.hasNext()) {
+			Map.Entry Element = (Map.Entry) PlayerIterator.next();
+			Player IteratedPlayer = (Player) Element.getValue();
+			IteratedPlayer.addPotionEffect(Effect);
 		}
 		
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
